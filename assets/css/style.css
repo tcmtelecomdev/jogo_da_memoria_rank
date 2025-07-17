@@ -12,7 +12,6 @@ body {
   align-items: center;
   min-height: 100vh;
   height: auto;
-  padding-bottom: 40px;
   /* espaço extra em telas pequenas */
   background-color: #eeeeee;
   flex-direction: column;
@@ -283,6 +282,13 @@ body {
   }
 }
 
+@media (max-height: 700px) {
+  #ranking {
+    top: 60%;
+    transform: translate(-50%, -60%);
+  }
+}
+
 #btnRanking {
   margin-top: 10px;
   padding: 10px 20px;
@@ -460,6 +466,13 @@ body {
       rgba(255, 255, 255, 0.05));
   transform: skewX(-20deg);
   animation: brilhoTexto 5s ease-in-out infinite;
+}
+
+#ranking {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* Animações compartilhadas */

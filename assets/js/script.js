@@ -331,6 +331,8 @@ function irParaRanking() {
   const rankingSection = document.getElementById("ranking");
   rankingSection.classList.remove("oculto");
 
+  document.getElementById("mainTitle").style.display = "none";
+
   // Oculta o tempo
   document.getElementById("time").parentElement.classList.add("oculto");
 
@@ -348,6 +350,8 @@ function irParaRanking() {
 function voltarTelaInicial() {
   const gameStart = document.getElementById("gameStart");
   gameStart.style.display = "flex";
+
+  document.getElementById("mainTitle").style.display = "block";
 
   document.getElementById("ranking").classList.add("oculto");
   document.getElementById("time").parentElement.classList.add("oculto");
