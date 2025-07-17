@@ -404,3 +404,26 @@ body {
 .ranking-buttons button:hover {
   background-color: #ffd6dc;
 }
+
+#playerName {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: 2px solid #ff3333;
+  border-radius: 8px;
+  background-color: #1a1a1a;
+  color: #fff;
+  outline: none;
+  width: 350px;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+#playerName::placeholder {
+  color: #aaa;
+  opacity: 0.8;
+}
+
+#playerName:focus {
+  border-color: #ffffff;
+  background-color: #111;
+}
