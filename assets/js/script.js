@@ -238,7 +238,6 @@ function verificarLocalStorage() {
   }
 }
 
-
 function compararTime(time) {
   const tempoAtual = calculateTime(time);
   const tempoSalvo = localStorage.getItem("time");
@@ -299,7 +298,7 @@ function salvarNoRanking(nome, tempoMs) {
   });
 
   // Limita a 5 melhores posições
-  const topRanking = ranking.slice(0, 5);
+  const topRanking = ranking.slice(0, 10);
 
   localStorage.setItem("ranking", JSON.stringify(topRanking));
 }

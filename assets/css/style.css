@@ -355,6 +355,127 @@ body {
   margin-right: 10px;
 }
 
+/* 🥇 1º lugar — destaque máximo */
+.ranking-list li:nth-child(1) {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, #ff3e57, #ff6f91, #ff3e57);
+  background-size: 200%;
+  animation: brilhoReflexo 3s ease-in-out infinite, pulsar 2s ease-in-out infinite;
+  border: 2px solid #FFD700;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  z-index: 3;
+}
+
+.ranking-list li:nth-child(1)::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.2)
+  );
+  transform: skewX(-20deg);
+  animation: brilhoTexto 3s ease-in-out infinite;
+}
+
+/* 🥈 2º lugar — brilho mais leve e pulsar reduzido */
+.ranking-list li:nth-child(2) {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, #ff3e57, #ff6f91, #ff3e57);
+  background-size: 200%;
+  animation: brilhoReflexo 4s ease-in-out infinite, pulsar 3s ease-in-out infinite;
+  border: 2px solid #C0C0C0;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+  z-index: 2;
+}
+
+.ranking-list li:nth-child(2)::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.1)
+  );
+  transform: skewX(-20deg);
+  animation: brilhoTexto 4s ease-in-out infinite;
+}
+
+/* 🥉 3º lugar — efeito mais sutil */
+.ranking-list li:nth-child(3) {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, #ff3e57, #ff6f91, #ff3e57);
+  background-size: 200%;
+  animation: brilhoReflexo 5s ease-in-out infinite, pulsar 4s ease-in-out infinite;
+  border: 2px solid #CD7F32;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.15);
+  z-index: 1;
+}
+
+.ranking-list li:nth-child(3)::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.05)
+  );
+  transform: skewX(-20deg);
+  animation: brilhoTexto 5s ease-in-out infinite;
+}
+
+/* Animações compartilhadas */
+@keyframes brilhoReflexo {
+  0% {
+    background-position: -100% 0;
+  }
+  50% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@keyframes brilhoTexto {
+  0% {
+    left: -75%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes pulsar {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
 .ranking-list li:nth-child(2)::before {
   content: "🥈";
   font-size: 1.2rem;
