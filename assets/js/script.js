@@ -35,13 +35,11 @@ function startGame() {
   cardStart.play();
 
   // Funções relacionadas ao tempo do jogo
-  stopTime();         // Para o tempo
-  verificarLocalStorage(); // Verifica se há registros no armazenamento local
-  startTime();        // Inicia o tempo
+  stopTime();
+  verificarLocalStorage();
+  startTime();
 
-  // Inicializa as cartas do jogo
-  startTime();        // Inicia o tempo
-  initializeCards(game.createCardsFromTechs()); // Cria e exibe as cartas
+  initializeCards(game.createCardsFromTechs());
 
   // ✅ Exibe o TOP 3 após iniciar o jogo
   const top3 = document.getElementById("top3Container");
@@ -123,16 +121,20 @@ function flipCard() {
           pauseTime();
           cardWin.play();
 
-          resultadoP.innerHTML = `Parabéns! 🥳<br><br>Tempo de jogo ${calculateTime(time)} ⏱️`;
+          // Primeiro salva no ranking
+          salvarNoRanking(currentPlayerName, time);
+
+          // Depois gera a mensagem
+          resultadoP.innerHTML = gerarMensagemFinal(currentPlayerName, time);
+
           gameOverLayer.style.display = "flex";
 
           compararTime(time);
-          salvarNoRanking(currentPlayerName, time);
           exibirRanking();
 
           setTimeout(() => {
             restart(); // ← reinicia tudo corretamente
-          }, 5000);
+          }, 10000);
         }
       } else {
         // Se as cartas não forem iguais
@@ -276,6 +278,32 @@ function compararTime(time) {
   }
 }
 
+// Função para exibir a mensagem ao finalizar o jogo
+function gerarMensagemFinal(nome, tempoMs) {
+  const ranking = JSON.parse(localStorage.getItem("ranking")) || [];
+
+  // Garante que o nome está sem espaços extras
+  const nomeLimpo = nome.trim();
+
+  // Encontra a posição do jogador com base no nome e no tempo bruto
+  const posicao = ranking.findIndex(j => j.nome === nomeLimpo && j.tempoMs === tempoMs) + 1;
+
+  // Formata o tempo para exibição
+  const tempoFormatado = calculateTime(tempoMs);
+
+  // Define a mensagem de acordo com a posição
+  if (posicao === 1) {
+    return `TEMPO RECORDE 🤩<br><br>Parabéns, você é o 1º colocado<br><br>Tempo de jogo ${tempoFormatado} ⏱️`;
+  } else if (posicao === 2) {
+    return `EXCELENTE 😁<br><br>Jogou muito bem, você é o 2º colocado<br><br>Tempo de jogo ${tempoFormatado} ⏱️`;
+  } else if (posicao === 3) {
+    return `ÓTIMO 😎<br><br>Bem jogado, você é o 3º colocado<br><br>Tempo de jogo ${tempoFormatado} ⏱️`;
+  } else if (posicao >= 4 && posicao <= 10) {
+    return `Parabéns, você ficou em ${posicao}º colocado 😉<br><br>Tempo de jogo ${tempoFormatado} ⏱️`;
+  } else {
+    return `Parabéns 🥳<br><br>Tempo de jogo ${tempoFormatado} ⏱️`;
+  }
+}
 
 // Função de inicialização quando a página é carregada
 document.addEventListener("DOMContentLoaded", function () {
@@ -305,14 +333,13 @@ function salvarNoRanking(nome, tempoMs) {
   const tempoFormatado = calculateTime(tempoMs);
   const ranking = JSON.parse(localStorage.getItem("ranking")) || [];
 
-  ranking.push({ nome, tempo: tempoFormatado });
-
-  // Ordena do menor para o maior tempo
-  ranking.sort((a, b) => {
-    const [minA, segA] = a.tempo.split(":").map(Number);
-    const [minB, segB] = b.tempo.split(":").map(Number);
-    return (minA * 60 + segA) - (minB * 60 + segB);
+  ranking.push({
+    nome: nome.trim(),
+    tempo: tempoFormatado,
+    tempoMs: tempoMs
   });
+
+  ranking.sort((a, b) => a.tempoMs - b.tempoMs);
 
   // Limita a 5 melhores posições
   const topRanking = ranking.slice(0, 10);
