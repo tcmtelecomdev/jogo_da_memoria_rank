@@ -17,16 +17,17 @@
     <img src="./assets/img/logo_tcm.png" alt="Logo TCM" class="logo-topo">
     <div class="mensagem">
       <h1 id="mainTitle">Jogo da Memória</h1>
-      <input type="text" id="playerName" placeholder="Digite seu nome" />
+      <input type="text" id="playerName" placeholder="Digite seu nome" required autofocus/>
       <button id="start" onclick="startGame()">Iniciar Jogo</button>
       <button id="btnRanking" onclick="irParaRanking()">Ver Ranking 🏆</button>
     </div>
   </div>
 
-  <h1>Jogo da Memória</h1>
+  <!-- <h1>Jogo da Memória</h1> -->
   <div id="top3Container" class="recorde-container oculto">
     <p>⭐ TOP 3 ⭐</p>
-    <ul id="recordeLista"></ul>
+    <ul id="recordeLista" class="ranking-list"></ul>
+
   </div>
 
   <div id="gameBoard">

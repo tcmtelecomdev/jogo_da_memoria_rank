@@ -40,7 +40,15 @@ function startGame() {
   startTime();        // Inicia o tempo
 
   // Inicializa as cartas do jogo
+  startTime();        // Inicia o tempo
   initializeCards(game.createCardsFromTechs()); // Cria e exibe as cartas
+
+  // ✅ Exibe o TOP 3 após iniciar o jogo
+  const top3 = document.getElementById("top3Container");
+  top3.classList.remove("oculto");
+  top3.classList.add("jogo"); // Aplica estilos reduzidos
+  verificarLocalStorage();
+
 }
 
 // Função para inicializar as cartas do jogo
@@ -162,7 +170,6 @@ function restart() {
 
   document.getElementById("ranking").classList.add("oculto");
   document.getElementById("time").parentElement.classList.add("oculto");
-  document.getElementById("top3Container").classList.remove("oculto");
 
   document.getElementById("gameBoard").innerHTML = "";
   document.getElementById("playerName").value = "";
@@ -170,6 +177,10 @@ function restart() {
   verificarLocalStorage();
 
   window.scrollTo({ top: 0, behavior: "smooth" });
+
+  const top3 = document.getElementById("top3Container");
+  top3.classList.add("oculto");
+  top3.classList.remove("jogo");
 }
 
 // Funções relacionadas ao tempo do jogo
@@ -228,9 +239,15 @@ function verificarLocalStorage() {
   if (ranking && ranking.length > 0) {
     ranking.slice(0, 3).forEach((jogador, index) => {
       const li = document.createElement("li");
-      li.textContent = `${index + 1}º ${jogador.nome} ${jogador.tempo}`;
+
+      li.innerHTML = `
+    <span class="nome">${index + 1}º - ${jogador.nome}</span>
+    <span class="tempo">${jogador.tempo}</span>
+  `;
+
       ul.appendChild(li);
     });
+
   } else {
     const li = document.createElement("li");
     li.textContent = "Nenhum recorde registrado";
@@ -269,8 +286,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!rankingSection.classList.contains("oculto")) {
     top3Container.classList.add("oculto");
   } else {
-    top3Container.classList.remove("oculto");
-    verificarLocalStorage();
+    // top3Container.classList.remove("oculto");
+    // verificarLocalStorage();
   }
 
   exibirRanking();
@@ -340,11 +357,11 @@ function irParaRanking() {
   const top3Container = document.getElementById("top3Container");
   if (top3Container) {
     top3Container.classList.add("oculto"); // ← isso oculta o <p> e o <ul> juntos
+    top3Container.classList.remove("jogo");
   }
 
   rankingSection.scrollIntoView({ behavior: "smooth" });
 }
-
 
 // Função para retornar a tela inicial
 function voltarTelaInicial() {
@@ -355,7 +372,9 @@ function voltarTelaInicial() {
 
   document.getElementById("ranking").classList.add("oculto");
   document.getElementById("time").parentElement.classList.add("oculto");
-  document.getElementById("top3Container").classList.remove("oculto");
+
+  document.getElementById("top3Container").classList.add("oculto");
+  document.getElementById("top3Container").classList.remove("jogo");
 
   document.getElementById("gameBoard").innerHTML = "";
   document.getElementById("playerName").value = "";
@@ -367,6 +386,8 @@ function voltarTelaInicial() {
   time = 0;
   pauseTime();
   stopTime();
+
+  document.getElementById("top3Container").classList.remove("jogo");
 
   window.scrollTo({ top: 0, behavior: "smooth" });
 }

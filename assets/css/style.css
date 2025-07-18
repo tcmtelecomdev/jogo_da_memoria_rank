@@ -25,7 +25,6 @@ body {
   transform-style: preserve-3d;
   /* faz com que indentifique o flip deixando o card 3d */
   transition: transform 0.5s;
-
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
   -webkit-transition: transform 0.5s;
@@ -474,6 +473,23 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+/* === ESTILOS REDUZIDOS PARA O TOP 3 NO JOGO === */
+#top3Container.jogo .ranking-list li {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+
+#top3Container.jogo .ranking-list li::before {
+  font-size: 1rem;
+  margin-right: 6px;
+}
+
+#top3Container.jogo p {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
 
 /* Animações compartilhadas */
 @keyframes brilhoReflexo {
