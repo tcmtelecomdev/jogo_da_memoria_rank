@@ -322,13 +322,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("playerName").value = "";
 });
 
-
-// Função para resetar o recorde
-// document.getElementById("resetRecorde").addEventListener("click", function () {
-//   localStorage.removeItem("time");
-//   verificarLocalStorage(); // Atualiza a exibição do recorde
-// });
-
 function salvarNoRanking(nome, tempoMs) {
   const tempoFormatado = calculateTime(tempoMs);
   const ranking = JSON.parse(localStorage.getItem("ranking")) || [];
@@ -421,12 +414,12 @@ function voltarTelaInicial() {
 
 // Função para resetar o Ranking e o Tempo Recorde
 function resetarRanking() {
-  const confirmar = confirm("Tem certeza que deseja resetar o ranking e o recorde?");
+  const confirmar = confirm("Tem certeza que deseja resetar o ranking?");
   if (confirmar) {
     localStorage.removeItem("ranking");
     localStorage.removeItem("time");
     verificarLocalStorage();
     exibirRanking();
-    alert("Ranking e recorde foram resetados!");
+    alert("Ranking resetado!");
   }
 }
